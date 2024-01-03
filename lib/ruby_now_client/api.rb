@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "rest-client"
 require "json"
 require "base64"
 
 module RubyNowClient
-  class API
+  class API # rubocop:todo Style/Documentation
     attr_reader :host, :user, :password
 
     def initialize(host, user, password)
@@ -26,14 +28,14 @@ module RubyNowClient
 
     private
 
-    def interact(method, endpoint, body)
+    def interact(method, endpoint, body) # rubocop:todo Metrics/MethodLength
       url = "https://#{host}/#{endpoint}"
       puts "URL: #{url}"
       response = RestClient::Request.execute(
-        method: method,
-        url: url,
+        method:,
+        url:,
         payload: body.to_json,
-        headers: headers,
+        headers:,
         timeout: 15
       )
 
