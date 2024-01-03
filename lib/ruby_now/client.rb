@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "base64"
+
 # The RubyNow::Client class provides a Ruby interface to the ServiceNow API.
 # It allows for sending GET, POST, and PATCH requests to specified endpoints
 # with the necessary authentication and error handling.

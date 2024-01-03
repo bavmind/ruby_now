@@ -13,6 +13,7 @@ GEM
     ast (2.4.2)
     base64 (0.2.0)
     domain_name (0.6.20231109)
+    dotenv (2.8.1)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -22,6 +23,8 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2023.1205)
     minitest (5.20.0)
+    mocha (2.1.0)
+      ruby2_keywords (>= 0.0.5)
     mutex_m (0.2.0)
     netrc (0.11.0)
     parallel (1.24.0)
@@ -57,6 +60,7 @@ GEM
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     unicode-display_width (2.5.0)
 
 PLATFORMS
@@ -64,7 +68,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   minitest (~> 5.16)
+  mocha
   rake (~> 13.0)
   rubocop (~> 1.21)
   rubocop-minitest
