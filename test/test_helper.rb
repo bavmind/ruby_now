@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "ruby_now_client"
+require "ruby_now"
 
 require "minitest/autorun"

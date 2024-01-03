@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "lib/ruby_now_client/version"
+require_relative "lib/ruby_now/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "ruby_now_client"
-  spec.version = RubyNowClient::VERSION
+  spec.name = "ruby_now"
+  spec.version = RubyNow::VERSION
   spec.authors = ["Devran Cosmo Uenal"]
   spec.email = ["maccosmo@gmail.com"]
 
   spec.summary = "Simple ServiceNow API Client for Ruby."
-  spec.description = "RubyNowClient is a simple ServiceNow API Client for Ruby."
+  spec.description = "RubyNow is a simple ServiceNow API Client for Ruby."
   spec.homepage = "https://bavmind.com"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.3.0"
@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/bavmind"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/bavmind/ruby_now_client"
-  spec.metadata["changelog_uri"] = "https://github.com/bavmind/ruby_now_client/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/bavmind/ruby_now"
+  spec.metadata["changelog_uri"] = "https://github.com/bavmind/ruby_now/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

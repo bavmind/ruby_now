@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# The RubyNowClient::API class provides a Ruby interface to the ServiceNow API.
+# The RubyNow::Client class provides a Ruby interface to the ServiceNow API.
 # It allows for sending GET, POST, and PATCH requests to specified endpoints
 # with the necessary authentication and error handling.
-module RubyNowClient
-  class API # rubocop:todo Style/Documentation
+module RubyNow
+  class Client # rubocop:todo Style/Documentation
     attr_reader :host, :user, :password
 
-    # Initializes a new API client for ServiceNow.
+    # Initializes a new client for ServiceNow.
     # @param host [String] the ServiceNow instance host URL.
     # @param user [String] the username for authentication.
     # @param password [String] the password for authentication.
