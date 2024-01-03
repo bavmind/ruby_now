@@ -57,7 +57,6 @@ module RubyNow
     # @raise [RestClient::ExceptionWithResponse, StandardError] for any errors during the request.
     def interact(method, endpoint, body) # rubocop:todo Metrics/MethodLength
       url = "https://#{host}/#{endpoint}"
-      puts "URL: #{url}"
       response = RestClient::Request.execute(
         method:,
         url:,
