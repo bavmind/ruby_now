@@ -1,9 +1,9 @@
-require 'rest-client'
-require 'json'
-require 'base64'
+require "rest-client"
+require "json"
+require "base64"
 
 module RubyNowClient
-  class Client
+  class API
     attr_reader :host, :user, :password
 
     def initialize(host, user, password)
@@ -44,7 +44,7 @@ module RubyNowClient
       puts "ERROR: #{e.message}"
       puts "BODY: #{e.response.body}"
       raise
-    rescue => e
+    rescue StandardError => e
       puts "ERROR: #{e.message}"
       raise
     end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/rubynow_client/version"
+require_relative "lib/ruby_now_client/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "rubynow_client"
-  spec.version = RubynowClient::VERSION
+  spec.name = "ruby_now_client"
+  spec.version = RubyNowClient::VERSION
   spec.authors = ["Devran Cosmo Uenal"]
   spec.email = ["maccosmo@gmail.com"]
 
@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/bavmind"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/bavmind/rubynow_client"
-  spec.metadata["changelog_uri"] = "https://github.com/bavmind/rubynow_client/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/bavmind/ruby_now_client"
+  spec.metadata["changelog_uri"] = "https://github.com/bavmind/ruby_now_client/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "base64"
   spec.add_dependency "rest-client", "~> 2.1"
 
   # For more information and examples about making a new gem, check out our
