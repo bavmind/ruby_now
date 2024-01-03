@@ -57,16 +57,13 @@ module RubyNow
     # @raise [RestClient::ExceptionWithResponse, StandardError] for any errors during the request.
     def interact(method, endpoint, body) # rubocop:todo Metrics/MethodLength
       url = "https://#{host}/#{endpoint}"
-      response = RestClient::Request.execute(
+      RestClient::Request.execute(
         method:,
         url:,
         payload: body.to_json,
         headers:,
         timeout: 15
       )
-
-      # Add any response handling or parsing here if needed
-      JSON.parse(response.to_str)
     rescue RestClient::ExceptionWithResponse => e
       # Handle specific RestClient exceptions if needed
       puts "ERROR: #{e.message}"

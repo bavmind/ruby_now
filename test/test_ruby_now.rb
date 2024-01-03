@@ -19,20 +19,13 @@ class TestRubyNow < Minitest::Test
     @client = RubyNow::Client.new("#{service_now_instance}.service-now.com", username, passowrd)
   end
 
-  def test_get_request
-    @test_endpoint = "api/test_endpoint"
-    @test_body = { key: "value" }
-
-    mock_response = { "result" => "success" }.to_json
-    RestClient::Request.expects(:execute).returns(mock_response)
-    response = @client.get(@test_endpoint)
-
-    assert_equal "success", response["result"]
-  end
-
   def test_real_get_request
     response = @client.get("/api/now/table/kb_knowledge_base")
+    result = JSON.parse(response.body)
 
-    assert response.key?("result"), "Response should include 'result'"
+    assert_equal 200, response.code, "Response should be 200"
+    assert result.key?("result"), "Response should include 'result'"
+    assert result["result"].is_a?(Array), "Response should include 'result' as an array"
+    assert_predicate(result["result"].length, :positive?, "Response should include at least one result")
   end
 end
