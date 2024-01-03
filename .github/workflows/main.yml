@@ -27,3 +27,8 @@ jobs:
         bundler-cache: true
     - name: Run the default task
       run: bundle exec rake
+      env:
+        SERVICE_NOW_INSTANCE: ${{ secrets.SERVICE_NOW_INSTANCE }}
+        SERVICE_NOW_USERNAME: ${{secrets.SERVICE_NOW_USERNAME}}
+        SERVICE_NOW_PASSWORD: ${{secrets.SERVICE_NOW_PASSWORD}}
+
