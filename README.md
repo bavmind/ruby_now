@@ -6,19 +6,19 @@ RubyNowClient is a Ruby wrapper for interacting with the ServiceNow API. It simp
 
 Add this line to your application's Gemfile:
 
-```
+```ruby
 gem 'ruby_now_client'
 ```
 
 And then execute:
 
-```
+```sh
 $ bundle install
 ```
 
 Or install it yourself as:
 
-```
+```sh
 $ gem install ruby_now_client
 ```
 
@@ -30,7 +30,7 @@ To start using the RubyNowClient, you need to require it in your Ruby applicatio
 
 Initialize a client with your ServiceNow instance's host, user, and password:
 
-```
+```ruby
 require 'ruby_now_client'
 
 client = RubyNowClient::API.new('your-instance.service-now.com', 'username', 'password')
@@ -42,19 +42,19 @@ You can make GET, POST, and PATCH requests to your ServiceNow instance using the
 
 #### GET Request
 
-```
+```ruby
 response = client.get('api/endpoint')
 ```
 
 #### POST Request
 
-```
+```ruby
 response = client.post('api/endpoint', { key: 'value' })
 ```
 
 #### PATCH Request
 
-```
+```ruby
 response = client.patch('api/endpoint', { key: 'new_value' })
 ```
 
@@ -62,7 +62,7 @@ response = client.patch('api/endpoint', { key: 'new_value' })
 
 Handle any potential errors during API calls:
 
-```
+```ruby
 begin
   response = client.get('api/endpoint')
 rescue RestClient::ExceptionWithResponse => e
