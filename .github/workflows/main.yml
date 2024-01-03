@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
+    environment: 
+      name: test
+      url: https://github.com
     strategy:
       matrix:
         ruby:
