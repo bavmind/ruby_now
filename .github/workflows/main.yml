@@ -29,5 +29,11 @@ jobs:
       run: bundle exec rake
       env:
         SERVICE_NOW_INSTANCE: ${{ secrets.SERVICE_NOW_INSTANCE }}
-        SERVICE_NOW_USERNAME: ${{secrets.SERVICE_NOW_USERNAME}}
-        SERVICE_NOW_PASSWORD: ${{secrets.SERVICE_NOW_PASSWORD}}
+        SERVICE_NOW_USERNAME: ${{ secrets.SERVICE_NOW_USERNAME }}
+        SERVICE_NOW_PASSWORD: ${{ secrets.SERVICE_NOW_PASSWORD }}
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.67.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: patch
