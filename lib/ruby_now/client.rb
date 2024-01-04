@@ -8,17 +8,12 @@ module RubyNow
   class Client
     attr_reader :host, :user, :password
 
-    def initialize(host, user, password)
+    def initialize(host, user, password, options = {})
       @host = host
       @user = user
       @password = password
-      @connection = Faraday.new(url: "https://#{host}") do |faraday|
-        faraday.request :url_encoded
-        faraday.adapter Faraday.default_adapter
-        faraday.headers["Content-Type"] = "application/json"
-        faraday.headers["Accept"] = "application/json"
-        faraday.headers["Authorization"] = "Basic #{Base64.strict_encode64("#{user}:#{password}")}"
-      end
+      @timeout = options[:timeout] || 10
+      setup_connection
     end
 
     def get(endpoint, body = nil)
@@ -47,6 +42,30 @@ module RubyNow
     rescue Faraday::Error => e
       puts "ERROR: #{e.message}"
       raise
+    end
+
+    def setup_connection
+      @connection = Faraday.new(url: "https://#{@host}") do |faraday|
+        setup_faraday(faraday)
+      end
+    end
+
+    def setup_faraday(faraday)
+      faraday.request :url_encoded
+      faraday.adapter Faraday.default_adapter
+      setup_headers(faraday)
+      setup_options(faraday)
+    end
+
+    def setup_headers(faraday)
+      faraday.headers["Content-Type"] = "application/json"
+      faraday.headers["Accept"] = "application/json"
+      faraday.headers["Authorization"] = "Basic #{Base64.strict_encode64("#{@user}:#{@password}")}"
+    end
+
+    def setup_options(faraday)
+      faraday.options.timeout = @timeout
+      faraday.options.open_timeout = @timeout
     end
   end
 end
