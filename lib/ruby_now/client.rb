@@ -1,88 +1,52 @@
 # frozen_string_literal: true
 
-require "base64"
+require "faraday"
+require "json"
 
-# The RubyNow::Client class provides a Ruby interface to the ServiceNow API.
-# It allows for sending GET, POST, and PATCH requests to specified endpoints
-# with the necessary authentication and error handling.
 module RubyNow
-  class Client # rubocop:todo Style/Documentation
+  # Client is a wrapper around Faraday to interact with the ServiceNow API
+  class Client
     attr_reader :host, :user, :password
 
-    # Initializes a new client for ServiceNow.
-    # @param host [String] the ServiceNow instance host URL.
-    # @param user [String] the username for authentication.
-    # @param password [String] the password for authentication.
     def initialize(host, user, password)
       @host = host
       @user = user
       @password = password
+      @connection = Faraday.new(url: "https://#{host}") do |faraday|
+        faraday.request :url_encoded
+        faraday.adapter Faraday.default_adapter
+        faraday.headers["Content-Type"] = "application/json"
+        faraday.headers["Accept"] = "application/json"
+        faraday.headers["Authorization"] = "Basic #{Base64.strict_encode64("#{user}:#{password}")}"
+      end
     end
 
-    # Sends a PATCH request to the specified ServiceNow endpoint.
-    # @param endpoint [String] the API endpoint to send the request to.
-    # @param body [Hash] the request body, typically in Hash format.
-    # @return [Hash] parsed JSON response from the ServiceNow API.
-    # @raise [RestClient::ExceptionWithResponse] if the request fails.
-    def patch(endpoint, body)
-      interact(:patch, endpoint, body)
-    end
-
-    # Sends a POST request to the specified ServiceNow endpoint.
-    # @param endpoint [String] the API endpoint to send the request to.
-    # @param body [Hash] the request body, typically in Hash format.
-    # @return [Hash] parsed JSON response from the ServiceNow API.
-    # @raise [RestClient::ExceptionWithResponse] if the request fails.
-    def post(endpoint, body)
-      interact(:post, endpoint, body)
-    end
-
-    # Sends a GET request to the specified ServiceNow endpoint.
-    # @param endpoint [String] the API endpoint to send the request to.
-    # @param body [nil] the request body, nil for GET requests.
-    # @return [Hash] parsed JSON response from the ServiceNow API.
-    # @raise [RestClient::ExceptionWithResponse] if the request fails.
     def get(endpoint, body = nil)
       interact(:get, endpoint, body)
     end
 
-    private
-
-    # Handles the interaction with the ServiceNow API.
-    # This method is used internally by public methods to send requests.
-    # @param method [Symbol] the HTTP method (:get, :post, :patch).
-    # @param endpoint [String] the API endpoint.
-    # @param body [Hash, nil] the request body for POST and PATCH, nil for GET.
-    # @return [Hash] parsed JSON response from the ServiceNow API.
-    # @raise [RestClient::ExceptionWithResponse, StandardError] for any errors during the request.
-    def interact(method, endpoint, body) # rubocop:todo Metrics/MethodLength
-      url = "https://#{host}/#{endpoint}"
-      RestClient::Request.execute(
-        method:,
-        url:,
-        payload: body.to_json,
-        headers:,
-        timeout: 15
-      )
-    rescue RestClient::ExceptionWithResponse => e
-      # Handle specific RestClient exceptions if needed
-      puts "ERROR: #{e.message}"
-      puts "BODY: #{e.response.body}"
-      raise
-    rescue StandardError => e
-      puts "ERROR: #{e.message}"
-      raise
+    def post(endpoint, body)
+      interact(:post, endpoint, body)
     end
 
-    # Generates the necessary headers for ServiceNow API requests.
-    # This method is used internally to set headers for each request.
-    # @return [Hash] the headers required for the API request.
-    def headers
-      {
-        content_type: "application/json",
-        accept: "application/json",
-        authorization: "Basic #{Base64.strict_encode64("#{user}:#{password}")}"
-      }
+    def patch(endpoint, body)
+      interact(:patch, endpoint, body)
+    end
+
+    def delete(endpoint, body = nil)
+      interact(:delete, endpoint, body)
+    end
+
+    private
+
+    def interact(method, endpoint, body)
+      @connection.send(method) do |req|
+        req.url endpoint
+        req.body = body.to_json if body
+      end
+    rescue Faraday::Error => e
+      puts "ERROR: #{e.message}"
+      raise
     end
   end
 end
