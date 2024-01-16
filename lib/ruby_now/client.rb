@@ -2,6 +2,7 @@
 
 require "faraday"
 require "json"
+require "base64"
 
 module RubyNow
   # Client is a wrapper around Faraday to interact with the ServiceNow API
