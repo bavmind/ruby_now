@@ -11,6 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
+    permissions: write-all
     environment: 
       name: Production
     strategy:
