@@ -59,7 +59,7 @@ module RubyNow
     end
 
     def setup_headers(faraday)
-      faraday.headers["Content-Type"] = "application/json"
+      faraday.headers["Content-Type"] = "application/json; charset=utf-8"
       faraday.headers["Accept"] = "application/json"
       faraday.headers["Authorization"] = "Basic #{Base64.strict_encode64("#{@user}:#{@password}")}"
     end
