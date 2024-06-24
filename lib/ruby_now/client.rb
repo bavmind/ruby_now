@@ -36,13 +36,23 @@ module RubyNow
     private
 
     def interact(method, endpoint, body)
-      @connection.send(method) do |req|
+      response = @connection.send(method) do |req|
         req.url endpoint
         req.body = body.to_json if body
       end
-    rescue Faraday::Error => e
-      puts "ERROR: #{e.message}"
-      raise
+      if response.status == 401
+        raise AuthenticationError, "Authentication failed"
+      end
+      if response.status == 400
+        raise BadRequestError, "Bad request"
+      end
+      if response.status == 404
+        raise NotFoundError, "Resource not found"
+      end
+      if response.status >= 500
+        raise ServerError, "Server error"
+      end
+      response
     end
 
     def setup_connection

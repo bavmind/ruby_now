@@ -5,5 +5,9 @@ require_relative "ruby_now/client"
 
 module RubyNow
   class Error < StandardError; end
-  # Your code goes here...
+  class TimeoutError < Error; end
+  class AuthenticationError < Error; end
+  class BadRequestError < Error; end
+  class NotFoundError < Error; end
+  class ServerError < Error; end
 end
