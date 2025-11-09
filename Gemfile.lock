@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby_now (0.1.1)
+    ruby_now (0.1.2)
       base64 (= 0.2.0)
       faraday (~> 2.9)
       json (~> 2.7.1)
