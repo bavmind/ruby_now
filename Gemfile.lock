@@ -3,8 +3,8 @@ PATH
   specs:
     ruby_now (0.1.2)
       base64 (= 0.2.0)
-      faraday (~> 2.9)
-      json (~> 2.7.1)
+      faraday (~> 2)
+      json (~> 2)
       mutex_m (~> 0.2.0)
 
 GEM
@@ -19,16 +19,16 @@ GEM
       logger
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
-    json (2.7.6)
+    json (2.16.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
-    minitest (5.26.1)
-    mocha (2.7.1)
+    minitest (5.26.2)
+    mocha (2.8.2)
       ruby2_keywords (>= 0.0.5)
     mutex_m (0.2.0)
-    net-http (0.7.0)
-      uri
+    net-http (0.8.0)
+      uri (>= 0.11.1)
     parallel (1.27.0)
     parser (3.3.10.0)
       ast (~> 2.4.1)
